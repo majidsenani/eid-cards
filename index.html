@@ -231,20 +231,15 @@
 
     <div class="section-label">اختر القالب</div>
     <div class="template-grid">
-        <div class="template-card selected" onclick="selectTemplate(1, this)">
+        <div class="template-card selected" onclick="selectTemplate(2, this)">
             <div class="check">✓</div>
-            <img src="eid1.png" alt="قالب 1">
+            <img src="eid2.jpg" alt="قالب 1">
             <span>قالب 1</span>
-        </div>
-        <div class="template-card" onclick="selectTemplate(2, this)">
-            <div class="check">✓</div>
-            <img src="eid2.jpg" alt="قالب 2">
-            <span>قالب 2</span>
         </div>
         <div class="template-card" onclick="selectTemplate(3, this)">
             <div class="check">✓</div>
-            <img src="eid3.jpg" alt="قالب 3">
-            <span>قالب 3</span>
+            <img src="eid3.jpg" alt="قالب 2">
+            <span>قالب 2</span>
         </div>
     </div>
 
@@ -268,12 +263,11 @@
 <script>
     // Template settings
     const templates = {
-        1: { src: 'eid1.png',  yRatio: 0.57, color: '#FFFFFF' },
         2: { src: 'eid2.jpg',  yRatio: 0.84, color: '#C9A84C' },
-        3: { src: 'eid3.jpg',  yRatio: 0.82, color: '#3a3a3a' },
+        3: { src: 'eid3.jpg',  yRatio: 0.88, color: '#3a3a3a' },
     };
 
-    let selectedId = 1;
+    let selectedId = 2;
     const myApiUrl = "https://sheetdb.io/api/v1/o9rk5zcf0ti1x";
 
     function selectTemplate(id, el) {
