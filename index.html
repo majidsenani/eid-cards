@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بطاقات تهنئة العيد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #1a3a2a, #0f2027);
+            min-height: 100vh;
+            font-family: 'Tajawal', sans-serif;
+            padding: 20px 15px 40px;
+            color: #fff;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 0 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #C9A84C;
+            letter-spacing: 1px;
+            text-shadow: 0 0 30px rgba(201,168,76,0.4);
+        }
+
+        .header p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 6px;
+        }
+
+        .container {
+            max-width: 460px;
+            margin: 0 auto;
+        }
+
+        /* Template Selector */
+        .section-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .template-grid {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .template-card {
+            flex: 1;
+            cursor: pointer;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2.5px solid transparent;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.05);
+            position: relative;
+        }
+
+        .template-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(201,168,76,0.5);
+        }
+
+        .template-card.selected {
+            border-color: #C9A84C;
+            box-shadow: 0 0 20px rgba(201,168,76,0.3);
+        }
+
+        .template-card img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .template-card .check {
+            display: none;
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            width: 22px;
+            height: 22px;
+            background: #C9A84C;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .template-card.selected .check {
+            display: flex;
+        }
+
+        .template-card span {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 8px 0;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .template-card.selected span {
+            color: #C9A84C;
+        }
+
+        /* Input Fields */
+        .input-group {
+            margin-bottom: 14px;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 16px 18px;
+            background: rgba(255,255,255,0.07);
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            color: #fff;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 17px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: #C9A84C;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .input-group textarea {
+            height: 80px;
+            resize: none;
+            font-size: 14px;
+        }
+
+        /* Button */
+        .btn-create {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #C9A84C, #e8c96d, #C9A84C);
+            background-size: 200% auto;
+            border: none;
+            border-radius: 14px;
+            color: #1a1a1a;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            margin-top: 6px;
+        }
+
+        .btn-create:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201,168,76,0.4);
+        }
+
+        .btn-create:active {
+            transform: translateY(0);
+        }
+
+        /* Result */
+        #result {
+            margin-top: 28px;
+            text-align: center;
+        }
+
+        #result img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 16px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            text-decoration: none;
+            padding: 14px 35px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(39,174,96,0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(39,174,96,0.4);
+        }
+
+        canvas { display: none; }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to left, transparent, rgba(201,168,76,0.3), transparent);
+            margin: 22px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🌙 بطاقات تهنئة العيد</h1>
+        <p>صمّم بطاقتك الخاصة في ثوانٍ</p>
+    </div>
+
+    <div class="section-label">اختر القالب</div>
+    <div class="template-grid">
+        <div class="template-card selected" onclick="selectTemplate(1, this)">
+            <div class="check">✓</div>
+            <img src="eid1.png" alt="قالب 1">
+            <span>قالب 1</span>
+        </div>
+        <div class="template-card" onclick="selectTemplate(2, this)">
+            <div class="check">✓</div>
+            <img src="eid2.jpg" alt="قالب 2">
+            <span>قالب 2</span>
+        </div>
+        <div class="template-card" onclick="selectTemplate(3, this)">
+            <div class="check">✓</div>
+            <img src="eid3.jpg" alt="قالب 3">
+            <span>قالب 3</span>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="input-group">
+        <input type="text" id="userName" placeholder="✍️ أدخل اسمك هنا..." maxlength="25">
+    </div>
+
+    <div class="input-group">
+        <textarea id="userNote" placeholder="💬 اكتب ملاحظة أو تهنئة خاصة..."></textarea>
+    </div>
+
+    <button class="btn-create" onclick="createCard()">🎉 صمّم بطاقتك الآن</button>
+
+    <div id="result"></div>
+</div>
+
+<canvas id="cardCanvas"></canvas>
+
+<script>
+    // Template settings
+    const templates = {
+        1: { src: 'eid1.png',  yRatio: 0.57, color: '#FFFFFF' },
+        2: { src: 'eid2.jpg',  yRatio: 0.84, color: '#C9A84C' },
+        3: { src: 'eid3.jpg',  yRatio: 0.82, color: '#3a3a3a' },
+    };
+
+    let selectedId = 1;
+    const myApiUrl = "https://sheetdb.io/api/v1/o9rk5zcf0ti1x";
+
+    function selectTemplate(id, el) {
+        selectedId = id;
+        document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    async function createCard() {
+        const name = document.getElementById('userName').value.trim();
+        const note = document.getElementById('userNote').value.trim();
+
+        if (!name) {
+            document.getElementById('userName').focus();
+            document.getElementById('userName').style.borderColor = '#e74c3c';
+            setTimeout(() => document.getElementById('userName').style.borderColor = '', 1500);
+            return;
+        }
+
+        const btn = document.querySelector('.btn-create');
+        btn.textContent = '⏳ جاري التصميم...';
+        btn.disabled = true;
+
+        // Save to sheet
+        fetch(myApiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "الاسم": name,
+                "الملاحظة": note,
+                "رقم القالب": selectedId,
+                "التاريخ": new Date().toLocaleString('ar-EG')
+            })
+        }).catch(() => {});
+
+        const t = templates[selectedId];
+        const canvas = document.getElementById('cardCanvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.src = t.src;
+
+        img.onload = async function() {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+
+            // Wait for Tajawal font
+            await document.fonts.ready;
+
+            ctx.font = 'bold 70px Tajawal';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = t.color;
+
+            // Subtle shadow for readability
+            ctx.shadowColor = 'rgba(0,0,0,0.3)';
+            ctx.shadowBlur = 8;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+
+            ctx.fillText(name, canvas.width / 2, canvas.height * t.yRatio);
+
+            ctx.shadowColor = 'transparent';
+
+            const finalImage = canvas.toDataURL('image/png');
+            document.getElementById('result').innerHTML = `
+                <img src="${finalImage}" alt="بطاقة العيد">
+                <br>
+                <a href="${finalImage}" download="Eid_Card_${name}.png" class="download-btn">⬇️ حفظ البطاقة</a>
+            `;
+
+            btn.textContent = '🎉 صمّم بطاقتك الآن';
+            btn.disabled = false;
+
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        img.onerror = function() {
+            btn.textContent = '🎉 صمّم بطاقتك الآن';
+            btn.disabled = false;
+        };
+    }
+</script>
+</body>
+</html>
+
