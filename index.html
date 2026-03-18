@@ -278,6 +278,11 @@
             <img src="eid3.jpg" alt="قالب 2">
             <span>قالب 2</span>
         </div>
+        <div class="template-card" onclick="selectTemplate(4, this)">
+            <div class="check">✓</div>
+            <img src="eid4.jpg" alt="قالب 3">
+            <span>قالب 3</span>
+        </div>
     </div>
 
     <div class="divider"></div>
@@ -302,6 +307,7 @@
     const templates = {
         2: { src: 'eid2.jpg',  yRatio: 0.84, color: '#C9A84C' },
         3: { src: 'eid3.jpg',  yRatio: 0.88, color: '#3a3a3a' },
+        4: { src: 'eid4.jpg',  yRatio: 0.79, color: '#1a3a8a' },
     };
 
     let selectedId = 2;
@@ -354,7 +360,8 @@
             // Wait for Tajawal font
             await document.fonts.ready;
 
-            ctx.font = 'bold 70px Tajawal';
+            const fontSize = Math.round(canvas.width * 0.065);
+            ctx.font = `bold ${fontSize}px Tajawal`;
             ctx.textAlign = 'center';
             ctx.fillStyle = t.color;
 
@@ -389,3 +396,4 @@
 </script>
 </body>
 </html>
+
