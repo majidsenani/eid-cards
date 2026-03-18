@@ -14,7 +14,44 @@
             font-family: 'Tajawal', sans-serif;
             padding: 20px 15px 40px;
             color: #fff;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Arabic calligraphy watermarks */
+        body::before {
+            content: 'عيد مبارك';
+            position: fixed;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 120px;
+            font-weight: 800;
+            color: rgba(201,168,76,0.04);
+            top: 5%;
+            right: -30px;
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+            transform: rotate(-25deg);
+            letter-spacing: 10px;
+        }
+
+        body::after {
+            content: 'كل عام وأنتم بخير';
+            position: fixed;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 90px;
+            font-weight: 800;
+            color: rgba(201,168,76,0.035);
+            bottom: 8%;
+            left: -20px;
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+            transform: rotate(-20deg);
+            letter-spacing: 8px;
+        }
+
+        .container { position: relative; z-index: 1; }
 
         .header {
             text-align: center;
@@ -250,7 +287,8 @@
     </div>
 
     <div class="input-group">
-        <textarea id="userNote" placeholder="💬 اكتب ملاحظة أو تهنئة خاصة..."></textarea>
+        <textarea id="userNote" placeholder="💬 اكتب ملاحظة لماجد..."></textarea>
+        <span style="font-size:12px; color:rgba(255,255,255,0.35); margin-right:4px;">اختياري</span>
     </div>
 
     <button class="btn-create" onclick="createCard()">🎉 صمّم بطاقتك الآن</button>
@@ -352,4 +390,3 @@
 </script>
 </body>
 </html>
-
