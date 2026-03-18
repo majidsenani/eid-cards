@@ -15,7 +15,8 @@
             padding: 20px 15px 40px;
             color: #fff;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         /* Arabic calligraphy watermarks */
@@ -33,6 +34,7 @@
             white-space: nowrap;
             transform: rotate(-25deg);
             letter-spacing: 10px;
+            overflow: hidden;
         }
 
         body::after {
@@ -49,6 +51,7 @@
             white-space: nowrap;
             transform: rotate(-20deg);
             letter-spacing: 8px;
+            overflow: hidden;
         }
 
         .container { position: relative; z-index: 1; }
@@ -251,6 +254,18 @@
 
         canvas { display: none; }
 
+        .template-card .count {
+            display: block;
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+            padding: 0 0 6px;
+            font-weight: 400;
+        }
+
+        .template-card.selected .count {
+            color: rgba(201,168,76,0.8);
+        }
+
         .divider {
             height: 1px;
             background: linear-gradient(to left, transparent, rgba(201,168,76,0.3), transparent);
@@ -272,16 +287,19 @@
             <div class="check">✓</div>
             <img src="eid2.jpg" alt="قالب 1">
             <span>قالب 1</span>
+            <span class="count" id="count-2">🖨️ ...</span>
         </div>
         <div class="template-card" onclick="selectTemplate(3, this)">
             <div class="check">✓</div>
             <img src="eid3.jpg" alt="قالب 2">
             <span>قالب 2</span>
+            <span class="count" id="count-3">🖨️ ...</span>
         </div>
         <div class="template-card" onclick="selectTemplate(4, this)">
             <div class="check">✓</div>
             <img src="eid4.jpg" alt="قالب 3">
             <span>قالب 3</span>
+            <span class="count" id="count-4">🖨️ ...</span>
         </div>
     </div>
 
@@ -311,6 +329,23 @@
     };
 
     let selectedId = 2;
+
+    // Fetch counts per template
+    async function loadCounts() {
+        try {
+            const res = await fetch("https://sheetdb.io/api/v1/o9rk5zcf0ti1x");
+            const data = await res.json();
+            const counts = {2: 0, 3: 0, 4: 0};
+            data.forEach(row => {
+                const id = parseInt(row['رقم القالب']);
+                if (counts[id] !== undefined) counts[id]++;
+            });
+            document.getElementById('count-2').textContent = `🖨️ ${counts[2]} طباعة`;
+            document.getElementById('count-3').textContent = `🖨️ ${counts[3]} طباعة`;
+            document.getElementById('count-4').textContent = `🖨️ ${counts[4]} طباعة`;
+        } catch(e) {}
+    }
+    loadCounts();
     const myApiUrl = "https://sheetdb.io/api/v1/o9rk5zcf0ti1x";
 
     function selectTemplate(id, el) {
